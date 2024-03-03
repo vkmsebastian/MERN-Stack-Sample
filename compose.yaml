@@ -1,0 +1,26 @@
+services:
+  frontend:
+    build:
+      context: frontend
+    ports:
+      - 3000:8080
+    restart: always
+    volumes:
+      - ./frontend:/usr/src/app
+    networks:
+      - react-express
+    depends_on:
+      - backend
+
+  backend:
+    restart: always
+    build:
+      context: backend
+    ports:
+      - 8082:8082
+    volumes:
+      - ./backend:/usr/src/app
+    networks:
+      - react-express
+networks:
+  react-express:
